@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waste Classifier</title>
+    <style>
+        body { font-family: Arial; text-align: center; padding: 50px; }
+        img { max-width: 300px; margin-top: 20px; }
+        .error { color: red; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Waste Classifier 🗑️</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required><br><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if prediction %}
+        <h3>{{ prediction }}</h3>
+        <img src="{{ image_url }}" alt="Uploaded Image">
+    {% endif %}
+</body>
+</html>
