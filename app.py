@@ -6,16 +6,34 @@ import numpy as np
 import os
 import secrets
 import logging
+import sys
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        logging.FileHandler('app.log')
+    ]
+)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-model = load_model("waste_clssifier.py/waste_classifier_model.h5")
+# Initialize model as None
+model = None
 class_labels = ['plastic', 'green-glass', 'other']
+
+try:
+    model_path = os.path.join(os.path.dirname(__file__), "waste_clssifier.py", "waste_classifier_model.h5")
+    logger.info(f"Loading model from: {model_path}")
+    model = load_model(model_path)
+    logger.info("Model loaded successfully")
+except Exception as e:
+    logger.error(f"Error loading model: {str(e)}")
+    sys.exit(1)
 
 # Generate a secure API key - this should be stored securely in production
 API_KEY = secrets.token_urlsafe(32)
@@ -33,6 +51,18 @@ def verify_api_key():
         return False
     return True
 
+# Health check endpoint
+@app.route("/api/health", methods=["GET"])
+def health_check():
+    if model is None:
+        return jsonify({"status": "unhealthy", "message": "Model not loaded"}), 503
+    return jsonify({
+        "status": "healthy",
+        "message": "API is running",
+        "model_loaded": model is not None
+    }), 200
+
+# Original web interface route
 @app.route("/", methods=["GET", "POST"])
 def index():
     prediction = None
@@ -74,10 +104,7 @@ def index():
 
     return render_template("index.html", prediction=prediction, error=error, image_url=image_url)
 
-@app.route("/api/health", methods=["GET"])
-def health_check():
-    return jsonify({"status": "healthy", "message": "API is running"}), 200
-
+# API endpoint
 @app.route("/api/predict", methods=["POST"])
 def predict_api():
     client_ip = request.remote_addr
@@ -137,5 +164,13 @@ def predict_api():
         return jsonify({"error": f"Error processing image: {str(e)}"}), 500
 
 if __name__ == "__main__":
+    if model is None:
+        logger.error("Cannot start server: Model failed to load")
+        sys.exit(1)
+        
     logger.info("Starting waste classification API server...")
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    try:
+        app.run(host='0.0.0.0', port=5000, debug=True)
+    except Exception as e:
+        logger.error(f"Error starting server: {str(e)}")
+        sys.exit(1)
