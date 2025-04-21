@@ -214,13 +214,15 @@ def index():
     )
 
 if __name__ == "__main__":
+    import os
     if model is None:
         logger.error("Cannot start server: Model failed to load")
         sys.exit(1)
         
     logger.info("Starting waste classification API server...")
     try:
-        app.run(host='0.0.0.0', port=5000, debug=False)  # Set debug=False for production
+        port = int(os.environ.get('PORT', 5000))
+        app.run(host='0.0.0.0', port=port, debug=False)  # Set debug=False for production
     except Exception as e:
         logger.error(f"Error starting server: {str(e)}")
         sys.exit(1)
