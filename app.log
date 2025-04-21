@@ -134,3 +134,36 @@ TypeError: Unexpected keyword argument passed to optimizer: weight_decay. Allowe
 2025-04-21 01:44:58,501 - ERROR - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:58] code 400, message Bad request version ("0\\\x16»'")
 2025-04-21 01:44:58,697 - ERROR - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:58] code 400, message Bad request version ('\x9a\x9a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93')
 2025-04-21 01:44:58,706 - ERROR - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:58] code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x003\x04ï\x04í')
+2025-04-21 10:27:24,110 - INFO - [app.py:27] - Starting application initialization...
+2025-04-21 10:27:24,111 - INFO - [app.py:28] - TensorFlow version: 2.13.0
+2025-04-21 10:27:24,111 - INFO - [app.py:67] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 10:27:24,111 - INFO - [app.py:68] - Current working directory: D:\waste_classifier app
+2025-04-21 10:27:24,112 - INFO - [app.py:69] - Model file exists: True
+2025-04-21 10:27:24,122 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 10:27:24,770 - INFO - [app.py:75] - Model architecture loaded
+2025-04-21 10:27:24,786 - INFO - [app.py:83] - Model compiled with custom optimizer
+2025-04-21 10:27:24,786 - INFO - [app.py:93] - Model loaded successfully
+2025-04-21 10:27:24,789 - INFO - [app.py:162] - Starting waste classification API server...
+2025-04-21 10:27:24,872 - WARNING - [_internal.py:225] -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-21 10:27:24,872 - INFO - [_internal.py:225] -  * Running on http://192.168.67.229:5000/ (Press CTRL+C to quit)
+2025-04-21 10:43:48,308 - INFO - [app.py:27] - Starting application initialization...
+2025-04-21 10:43:48,308 - INFO - [app.py:28] - TensorFlow version: 2.13.0
+2025-04-21 10:43:48,308 - INFO - [app.py:67] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 10:43:48,309 - INFO - [app.py:68] - Current working directory: D:\waste_classifier app
+2025-04-21 10:43:48,309 - INFO - [app.py:69] - Model file exists: True
+2025-04-21 10:43:48,331 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 10:43:49,170 - INFO - [app.py:75] - Model architecture loaded
+2025-04-21 10:43:49,189 - INFO - [app.py:83] - Model compiled with custom optimizer
+2025-04-21 10:43:49,189 - INFO - [app.py:93] - Model loaded successfully
+2025-04-21 10:43:49,194 - INFO - [app.py:162] - Starting waste classification API server...
+2025-04-21 10:43:49,217 - WARNING - [_internal.py:225] -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-21 10:43:49,218 - INFO - [_internal.py:225] -  * Running on http://192.168.67.229:5000/ (Press CTRL+C to quit)
+2025-04-21 10:44:04,488 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 10:44:04] "GET / HTTP/1.1" 200 -
+2025-04-21 10:44:12,514 - DEBUG - [app.py:132] - File saved to: static\upload_964fb692b9ff6b8f_images.jpeg
+2025-04-21 10:44:12,589 - DEBUG - [app.py:138] - Image loaded and preprocessed successfully
+2025-04-21 10:44:13,212 - INFO - [app.py:145] - Prediction made: Predicted class: green-glass (Confidence: 100.00%)
+2025-04-21 10:44:13,214 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 10:44:13] "POST / HTTP/1.1" 200 -
+2025-04-21 10:44:13,426 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 10:44:13] "GET /static/upload_964fb692b9ff6b8f_images.jpeg HTTP/1.1" 200 -
+2025-04-21 10:44:19,868 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 10:44:19] "GET / HTTP/1.1" 200 -
