@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from tensorflow.keras.layers import InputLayer as BaseInputLayer
@@ -96,7 +98,28 @@ except Exception as e:
     sys.exit(1)
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'your-secret-key-here'  # Required for sessions
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///waste_classifier.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    points = db.Column(db.Integer, default=0)
+    uploads = db.relationship('ImageUpload', backref='user', lazy=True)
+
+class ImageUpload(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(255), nullable=False)
+    prediction = db.Column(db.String(50))
+    confidence = db.Column(db.Float)
+    is_verified = db.Column(db.Boolean, default=False)
+    upload_date = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+with app.app_context():
+    db.create_all()
 
 # Health check endpoint
 @app.route("/api/health", methods=["GET"])
@@ -114,6 +137,17 @@ def index():
     prediction = None
     image_url = None
     error = None
+    points_added = 0
+    
+    # Ensure user exists in session
+    if 'user_id' not in session:
+        # Create new user
+        new_user = User()
+        db.session.add(new_user)
+        db.session.commit()
+        session['user_id'] = new_user.id
+
+    user = User.query.get(session['user_id'])
 
     if request.method == "POST":
         if 'image' not in request.files:
@@ -141,6 +175,24 @@ def index():
                     result = model.predict(img_array)
                     predicted_class = class_labels[np.argmax(result)]
                     confidence = float(np.max(result))
+                    
+                    # Add points if confidence is high (verification)
+                    if confidence > 0.85:  # High confidence threshold
+                        points_to_add = 10
+                        user.points += points_to_add
+                        points_added = points_to_add
+                    
+                    # Save upload record
+                    upload = ImageUpload(
+                        filename=filename,
+                        prediction=predicted_class,
+                        confidence=confidence,
+                        is_verified=confidence > 0.85,
+                        user_id=user.id
+                    )
+                    db.session.add(upload)
+                    db.session.commit()
+
                     prediction = f"Predicted class: {predicted_class} (Confidence: {confidence:.2%})"
                     logger.info(f"Prediction made: {prediction}")
 
@@ -152,7 +204,14 @@ def index():
                         os.remove(filepath)
                     image_url = None
 
-    return render_template("index.html", prediction=prediction, error=error, image_url=image_url)
+    return render_template(
+        "index.html", 
+        prediction=prediction, 
+        error=error, 
+        image_url=image_url,
+        user_points=user.points,
+        points_added=points_added
+    )
 
 if __name__ == "__main__":
     if model is None:
