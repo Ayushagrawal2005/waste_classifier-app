@@ -167,3 +167,42 @@ TypeError: Unexpected keyword argument passed to optimizer: weight_decay. Allowe
 2025-04-21 10:44:13,214 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 10:44:13] "POST / HTTP/1.1" 200 -
 2025-04-21 10:44:13,426 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 10:44:13] "GET /static/upload_964fb692b9ff6b8f_images.jpeg HTTP/1.1" 200 -
 2025-04-21 10:44:19,868 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 10:44:19] "GET / HTTP/1.1" 200 -
+2025-04-21 20:36:44,494 - INFO - [app.py:29] - Starting application initialization...
+2025-04-21 20:36:44,494 - INFO - [app.py:30] - TensorFlow version: 2.13.0
+2025-04-21 20:36:44,495 - INFO - [app.py:69] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 20:36:44,495 - INFO - [app.py:70] - Current working directory: D:\waste_classifier app
+2025-04-21 20:36:44,495 - INFO - [app.py:71] - Model file exists: True
+2025-04-21 20:36:44,529 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 20:36:45,383 - INFO - [app.py:77] - Model architecture loaded
+2025-04-21 20:36:45,398 - INFO - [app.py:85] - Model compiled with custom optimizer
+2025-04-21 20:36:45,398 - INFO - [app.py:95] - Model loaded successfully
+2025-04-21 20:39:15,346 - INFO - [app.py:29] - Starting application initialization...
+2025-04-21 20:39:15,346 - INFO - [app.py:30] - TensorFlow version: 2.13.0
+2025-04-21 20:39:15,347 - INFO - [app.py:69] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 20:39:15,347 - INFO - [app.py:70] - Current working directory: D:\waste_classifier app
+2025-04-21 20:39:15,347 - INFO - [app.py:71] - Model file exists: True
+2025-04-21 20:39:15,352 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 20:39:16,097 - INFO - [app.py:77] - Model architecture loaded
+2025-04-21 20:39:16,110 - INFO - [app.py:85] - Model compiled with custom optimizer
+2025-04-21 20:39:16,110 - INFO - [app.py:95] - Model loaded successfully
+2025-04-21 20:39:16,279 - INFO - [app.py:221] - Starting waste classification API server...
+2025-04-21 20:39:16,301 - WARNING - [_internal.py:225] -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-21 20:39:16,302 - INFO - [_internal.py:225] -  * Running on http://192.168.67.229:5000/ (Press CTRL+C to quit)
+2025-04-21 20:39:31,465 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 20:39:31] "GET / HTTP/1.1" 200 -
+2025-04-21 20:39:31,633 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 20:39:31] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-21 20:39:39,468 - DEBUG - [app.py:166] - File saved to: static\upload_b6d4ed57633a15d8_D.jpeg
+2025-04-21 20:39:39,743 - DEBUG - [app.py:172] - Image loaded and preprocessed successfully
+2025-04-21 20:39:40,353 - INFO - [app.py:197] - Prediction made: Predicted class: green-glass (Confidence: 100.00%)
+2025-04-21 20:39:40,359 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 20:39:40] "POST / HTTP/1.1" 200 -
+2025-04-21 20:39:40,534 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 20:39:40] "GET /static/upload_b6d4ed57633a15d8_D.jpeg HTTP/1.1" 200 -
+2025-04-21 20:39:49,580 - DEBUG - [app.py:166] - File saved to: static\upload_9c58a13365fbe1a6_bottle.jpeg
+2025-04-21 20:39:49,605 - DEBUG - [app.py:172] - Image loaded and preprocessed successfully
+2025-04-21 20:39:49,750 - INFO - [app.py:197] - Prediction made: Predicted class: plastic (Confidence: 100.00%)
+2025-04-21 20:39:49,756 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 20:39:49] "POST / HTTP/1.1" 200 -
+2025-04-21 20:39:49,772 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 20:39:49] "GET /static/upload_9c58a13365fbe1a6_bottle.jpeg HTTP/1.1" 200 -
+2025-04-21 20:39:58,271 - DEBUG - [app.py:166] - File saved to: static\upload_ca538fa413eae8b4_images.jpeg
+2025-04-21 20:39:58,280 - DEBUG - [app.py:172] - Image loaded and preprocessed successfully
+2025-04-21 20:39:58,431 - INFO - [app.py:197] - Prediction made: Predicted class: green-glass (Confidence: 100.00%)
+2025-04-21 20:39:58,437 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 20:39:58] "POST / HTTP/1.1" 200 -
+2025-04-21 20:39:58,454 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 20:39:58] "GET /static/upload_ca538fa413eae8b4_images.jpeg HTTP/1.1" 200 -
