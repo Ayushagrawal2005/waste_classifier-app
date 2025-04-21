@@ -2,6 +2,6 @@ services:
   - type: web
     name: waste-classifier-app
     env: python
-    buildCommand: "pip install -r requirements.txt"
+    buildCommand: "pip install -r requirements/requirements.txt"
     startCommand: "python app.py"
     rootDirectory: "./"
