@@ -1,1 +1,2 @@
 waste_clssifier.py/waste_classifier_model.h5 filter=lfs diff=lfs merge=lfs -text
+waste_classifier_model.h5 filter=lfs diff=lfs merge=lfs -text
