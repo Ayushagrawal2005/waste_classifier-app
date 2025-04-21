@@ -4,25 +4,148 @@
     <title>Waste Classifier</title>
     <link rel="icon" type="image/jpeg" href="{{ url_for('static', filename='bottle.jpeg') }}">
     <style>
-        body { font-family: Arial; text-align: center; padding: 50px; }
-        img { max-width: 300px; margin-top: 20px; }
-        .error { color: red; margin: 10px 0; }
+        body { 
+            font-family: Arial; 
+            text-align: center; 
+            padding: 50px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        img { 
+            max-width: 300px; 
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .error { 
+            color: red; 
+            margin: 10px 0; 
+        }
+        .points { 
+            color: green; 
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+        .points-added {
+            animation: fadeIn 1s;
+            color: #4CAF50;
+        }
+        form {
+            margin: 20px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .prediction {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
     </style>
 </head>
 <body>
     <h1>Waste Classifier 🗑️</h1>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="file" name="image" required><br><br>
-        <button type="submit">Predict</button>
+    <div class="points">
+        Your Points: <span id="points">{{ user_points }}</span>
+        <span id="points-added" class="points-added"></span>
+    </div>
+    
+    <form id="uploadForm">
+        <input type="file" name="image" accept="image/*" required><br><br>
+        <button type="submit" id="submitBtn">Predict</button>
     </form>
 
-    {% if error %}
-        <p class="error">{{ error }}</p>
-    {% endif %}
+    <div id="error" class="error"></div>
+    <div id="result">
+        <h3 id="prediction" class="prediction"></h3>
+        <img id="preview" style="display: none;" alt="Uploaded Image">
+    </div>
 
-    {% if prediction %}
-        <h3>{{ prediction }}</h3>
-        <img src="{{ image_url }}" alt="Uploaded Image">
-    {% endif %}
+    <script>
+        document.getElementById('uploadForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const submitBtn = document.getElementById('submitBtn');
+            const error = document.getElementById('error');
+            const prediction = document.getElementById('prediction');
+            const preview = document.getElementById('preview');
+            const pointsElement = document.getElementById('points');
+            const pointsAddedElement = document.getElementById('points-added');
+            
+            try {
+                error.textContent = '';
+                submitBtn.disabled = true;
+                prediction.textContent = 'Uploading...';
+                
+                // Upload the file
+                const uploadResponse = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!uploadResponse.ok) {
+                    throw new Error('Upload failed');
+                }
+                
+                const uploadData = await uploadResponse.json();
+                
+                // Update the image preview
+                preview.src = `/image/${uploadData.file_id}`;
+                preview.style.display = 'block';
+                
+                // Show processing status
+                prediction.textContent = 'Processing...';
+                
+                // Get prediction
+                const predictResponse = await fetch(`/predict/${uploadData.file_id}`, {
+                    method: 'POST'
+                });
+                
+                if (!predictResponse.ok) {
+                    throw new Error('Prediction failed');
+                }
+                
+                const result = await predictResponse.json();
+                
+                // Update prediction and points
+                prediction.textContent = `Predicted class: ${result.prediction} (Confidence: ${(result.confidence * 100).toFixed(2)}%)`;
+                
+                if (result.points_added > 0) {
+                    pointsElement.textContent = result.total_points;
+                    pointsAddedElement.textContent = ` (+${result.points_added} points!)`;
+                    setTimeout(() => {
+                        pointsAddedElement.textContent = '';
+                    }, 3000);
+                }
+                
+            } catch (error) {
+                console.error(error);
+                document.getElementById('error').textContent = error.message;
+                preview.style.display = 'none';
+                prediction.textContent = '';
+            } finally {
+                submitBtn.disabled = false;
+            }
+        };
+    </script>
 </body>
 </html>

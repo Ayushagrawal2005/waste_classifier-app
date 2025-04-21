@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, jsonify, session
+from flask import Flask, render_template, request, jsonify, session, send_file
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing import image
+from keras.utils import image
 from tensorflow.keras.layers import InputLayer as BaseInputLayer
 import numpy as np
 import os
@@ -14,6 +14,8 @@ import tensorflow as tf
 from tensorflow.keras.mixed_precision import Policy
 from tensorflow.keras.saving import register_keras_serializable
 from tensorflow.keras.optimizers import Adam
+from io import BytesIO
+from os import environ
 
 # Configure logging
 logging.basicConfig(
@@ -97,9 +99,18 @@ except Exception as e:
     logger.error(f"Failed to load model: {str(e)}")
     sys.exit(1)
 
-app = Flask(__name__)
+# Initialize Flask app with static_folder and static_url_path for Vercel
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 app.config['SECRET_KEY'] = 'your-secret-key-here'  # Required for sessions
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///waste_classifier.db'
+
+# Configure database based on environment
+if environ.get('VERCEL_ENV'):
+    # Use in-memory SQLite for Vercel
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+else:
+    # Use file-based SQLite for local development
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///waste_classifier.db'
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 CORS(app)
 db = SQLAlchemy(app)
@@ -120,6 +131,99 @@ class ImageUpload(db.Model):
 
 with app.app_context():
     db.create_all()
+
+# Add temporary file storage
+temp_storage = {}
+
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    if 'image' not in request.files:
+        return jsonify({"error": "No file uploaded"}), 400
+    
+    file = request.files["image"]
+    if file.filename == '':
+        return jsonify({"error": "No file selected"}), 400
+
+    try:
+        # Store file in memory
+        file_id = secrets.token_hex(8)
+        file_content = BytesIO(file.read())
+        temp_storage[file_id] = {
+            'content': file_content,
+            'filename': file.filename
+        }
+        
+        return jsonify({
+            "file_id": file_id,
+            "filename": file.filename
+        }), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/image/<file_id>")
+def get_image(file_id):
+    if file_id not in temp_storage:
+        return "File not found", 404
+    
+    file_data = temp_storage[file_id]
+    file_data['content'].seek(0)
+    return send_file(
+        file_data['content'],
+        mimetype='image/jpeg'
+    )
+
+@app.route("/predict/<file_id>", methods=["POST"])
+def predict_image(file_id):
+    if file_id not in temp_storage:
+        return jsonify({"error": "File not found"}), 404
+    
+    try:
+        file_data = temp_storage[file_id]
+        file_data['content'].seek(0)
+        
+        # Convert BytesIO to image array
+        img = image.load_img(file_data['content'], target_size=(224, 224))
+        img_array = image.img_to_array(img) / 255.0
+        img_array = np.expand_dims(img_array, axis=0)
+        
+        # Make prediction
+        result = model.predict(img_array)
+        predicted_class = class_labels[np.argmax(result)]
+        confidence = float(np.max(result))
+        
+        # Get user from session
+        user = None
+        points_added = 0
+        if 'user_id' in session:
+            user = User.query.get(session['user_id'])
+            if user and confidence > 0.85:
+                points_to_add = 10
+                user.points += points_to_add
+                points_added = points_to_add
+        
+        # Save upload record if user exists
+        if user:
+            upload = ImageUpload(
+                filename=file_data['filename'],
+                prediction=predicted_class,
+                confidence=confidence,
+                is_verified=confidence > 0.85,
+                user_id=user.id
+            )
+            db.session.add(upload)
+            db.session.commit()
+        
+        return jsonify({
+            "prediction": predicted_class,
+            "confidence": confidence,
+            "points_added": points_added,
+            "total_points": user.points if user else None
+        }), 200
+        
+    except Exception as e:
+        logger.error(f"Error during prediction: {str(e)}")
+        logger.exception("Full stack trace:")
+        return jsonify({"error": str(e)}), 500
 
 # Health check endpoint
 @app.route("/api/health", methods=["GET"])
@@ -213,6 +317,10 @@ def index():
         points_added=points_added
     )
 
+# For Vercel serverless deployment
+app.debug = False
+application = app
+
 if __name__ == "__main__":
     import os
     if model is None:
@@ -222,7 +330,7 @@ if __name__ == "__main__":
     logger.info("Starting waste classification API server...")
     try:
         port = int(os.environ.get('PORT', 5000))
-        app.run(host='0.0.0.0', port=port, debug=False)  # Set debug=False for production
+        app.run(host='0.0.0.0', port=port)
     except Exception as e:
         logger.error(f"Error starting server: {str(e)}")
         sys.exit(1)
