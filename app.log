@@ -1,0 +1,136 @@
+2025-04-21 01:38:03,548 - INFO - Loading model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 01:38:03,673 - ERROR - Error loading model: Error when deserializing class 'InputLayer' using config={'batch_shape': [None, 224, 224, 3], 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_3'}.
+
+Exception encountered: Unrecognized keyword arguments: ['batch_shape']
+2025-04-21 01:38:20,637 - INFO - [app.py:22] - Starting application initialization...
+2025-04-21 01:38:20,637 - INFO - [app.py:30] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 01:38:20,638 - INFO - [app.py:31] - Current working directory: D:\waste_classifier app
+2025-04-21 01:38:20,638 - INFO - [app.py:32] - Model file exists: True
+2025-04-21 01:38:20,642 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 01:38:20,676 - ERROR - [app.py:36] - Error loading model: Error when deserializing class 'InputLayer' using config={'batch_shape': [None, 224, 224, 3], 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_3'}.
+
+Exception encountered: Unrecognized keyword arguments: ['batch_shape']
+2025-04-21 01:38:20,676 - ERROR - [app.py:37] - Full stack trace:
+Traceback (most recent call last):
+  File "D:\waste_classifier app\app.py", line 33, in <module>
+    model = load_model(model_path)
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\saving\saving_api.py", line 238, in load_model
+    return legacy_sm_saving_lib.load_model(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\utils\traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\engine\base_layer.py", line 870, in from_config
+    raise TypeError(
+TypeError: Error when deserializing class 'InputLayer' using config={'batch_shape': [None, 224, 224, 3], 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_3'}.
+
+Exception encountered: Unrecognized keyword arguments: ['batch_shape']
+2025-04-21 01:39:59,051 - INFO - [app.py:23] - Starting application initialization...
+2025-04-21 01:39:59,051 - INFO - [app.py:24] - TensorFlow version: 2.13.0
+2025-04-21 01:39:59,051 - INFO - [app.py:33] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 01:39:59,051 - INFO - [app.py:34] - Current working directory: D:\waste_classifier app
+2025-04-21 01:39:59,052 - INFO - [app.py:35] - Model file exists: True
+2025-04-21 01:39:59,056 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 01:39:59,092 - ERROR - [app.py:44] - Error loading model: Error when deserializing class 'InputLayer' using config={'batch_shape': [None, 224, 224, 3], 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_3'}.
+
+Exception encountered: Unrecognized keyword arguments: ['batch_shape']
+2025-04-21 01:39:59,093 - ERROR - [app.py:45] - Full stack trace:
+Traceback (most recent call last):
+  File "D:\waste_classifier app\app.py", line 42, in load_model_with_custom_objects
+    return load_model(model_path, custom_objects=custom_objects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\saving\saving_api.py", line 238, in load_model
+    return legacy_sm_saving_lib.load_model(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\utils\traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\engine\base_layer.py", line 870, in from_config
+    raise TypeError(
+TypeError: Error when deserializing class 'InputLayer' using config={'batch_shape': [None, 224, 224, 3], 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_3'}.
+
+Exception encountered: Unrecognized keyword arguments: ['batch_shape']
+2025-04-21 01:39:59,095 - ERROR - [app.py:52] - Failed to load model: Error when deserializing class 'InputLayer' using config={'batch_shape': [None, 224, 224, 3], 'dtype': 'float32', 'sparse': False, 'name': 'input_layer_3'}.
+
+Exception encountered: Unrecognized keyword arguments: ['batch_shape']
+2025-04-21 01:40:56,314 - INFO - [app.py:24] - Starting application initialization...
+2025-04-21 01:40:56,314 - INFO - [app.py:25] - TensorFlow version: 2.13.0
+2025-04-21 01:40:56,315 - INFO - [app.py:42] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 01:40:56,315 - INFO - [app.py:43] - Current working directory: D:\waste_classifier app
+2025-04-21 01:40:56,315 - INFO - [app.py:44] - Model file exists: True
+2025-04-21 01:40:56,319 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 01:40:56,382 - ERROR - [app.py:53] - Error loading model: Error when deserializing class 'Conv2D' using config={'name': 'conv2d_98', 'trainable': True, 'dtype': {'module': 'keras', 'class_name': 'DTypePolicy', 'config': {'name': 'float32'}, 'registered_name': None}, 'filters': 32, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'valid', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': None}, 'bias_initializer': {'module': 'keras.initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': None}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}.
+
+Exception encountered: Unknown dtype policy: 'DTypePolicy'. Please ensure you are using a `keras.utils.custom_object_scope` and that this object is included in the scope. See https://www.tensorflow.org/guide/keras/save_and_serialize#registering_the_custom_object for details.
+2025-04-21 01:40:56,383 - ERROR - [app.py:54] - Full stack trace:
+Traceback (most recent call last):
+  File "D:\waste_classifier app\app.py", line 51, in load_model_with_custom_objects
+    return load_model(model_path, custom_objects=custom_objects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\saving\saving_api.py", line 238, in load_model
+    return legacy_sm_saving_lib.load_model(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\utils\traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\engine\base_layer.py", line 870, in from_config
+    raise TypeError(
+TypeError: Error when deserializing class 'Conv2D' using config={'name': 'conv2d_98', 'trainable': True, 'dtype': {'module': 'keras', 'class_name': 'DTypePolicy', 'config': {'name': 'float32'}, 'registered_name': None}, 'filters': 32, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'valid', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': None}, 'bias_initializer': {'module': 'keras.initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': None}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}.
+
+Exception encountered: Unknown dtype policy: 'DTypePolicy'. Please ensure you are using a `keras.utils.custom_object_scope` and that this object is included in the scope. See https://www.tensorflow.org/guide/keras/save_and_serialize#registering_the_custom_object for details.
+2025-04-21 01:40:56,390 - ERROR - [app.py:61] - Failed to load model: Error when deserializing class 'Conv2D' using config={'name': 'conv2d_98', 'trainable': True, 'dtype': {'module': 'keras', 'class_name': 'DTypePolicy', 'config': {'name': 'float32'}, 'registered_name': None}, 'filters': 32, 'kernel_size': [3, 3], 'strides': [1, 1], 'padding': 'valid', 'data_format': 'channels_last', 'dilation_rate': [1, 1], 'groups': 1, 'activation': 'relu', 'use_bias': True, 'kernel_initializer': {'module': 'keras.initializers', 'class_name': 'GlorotUniform', 'config': {'seed': None}, 'registered_name': None}, 'bias_initializer': {'module': 'keras.initializers', 'class_name': 'Zeros', 'config': {}, 'registered_name': None}, 'kernel_regularizer': None, 'bias_regularizer': None, 'activity_regularizer': None, 'kernel_constraint': None, 'bias_constraint': None}.
+
+Exception encountered: Unknown dtype policy: 'DTypePolicy'. Please ensure you are using a `keras.utils.custom_object_scope` and that this object is included in the scope. See https://www.tensorflow.org/guide/keras/save_and_serialize#registering_the_custom_object for details.
+2025-04-21 01:42:15,882 - INFO - [app.py:26] - Starting application initialization...
+2025-04-21 01:42:15,887 - INFO - [app.py:27] - TensorFlow version: 2.13.0
+2025-04-21 01:42:15,888 - INFO - [app.py:52] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 01:42:15,888 - INFO - [app.py:53] - Current working directory: D:\waste_classifier app
+2025-04-21 01:42:15,889 - INFO - [app.py:54] - Model file exists: True
+2025-04-21 01:42:15,894 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 01:42:16,699 - ERROR - [app.py:64] - Error loading model: Unexpected keyword argument passed to optimizer: weight_decay. Allowed kwargs are {'clipnorm', 'decay', 'lr', 'global_clipnorm', 'clipvalue'}.
+2025-04-21 01:42:16,701 - ERROR - [app.py:65] - Full stack trace:
+Traceback (most recent call last):
+  File "D:\waste_classifier app\app.py", line 59, in load_model_with_custom_objects
+    loaded_model = load_model(model_path)
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\saving\saving_api.py", line 238, in load_model
+    return legacy_sm_saving_lib.load_model(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\utils\traceback_utils.py", line 70, in error_handler
+    raise e.with_traceback(filtered_tb) from None
+  File "D:\waste_classifier app\.venv\Lib\site-packages\keras\src\optimizers\legacy\optimizer_v2.py", line 380, in __init__
+    raise TypeError(
+TypeError: Unexpected keyword argument passed to optimizer: weight_decay. Allowed kwargs are {'clipnorm', 'decay', 'lr', 'global_clipnorm', 'clipvalue'}.
+2025-04-21 01:42:16,706 - ERROR - [app.py:72] - Failed to load model: Unexpected keyword argument passed to optimizer: weight_decay. Allowed kwargs are {'clipnorm', 'decay', 'lr', 'global_clipnorm', 'clipvalue'}.
+2025-04-21 01:43:43,888 - INFO - [app.py:27] - Starting application initialization...
+2025-04-21 01:43:43,888 - INFO - [app.py:28] - TensorFlow version: 2.13.0
+2025-04-21 01:43:43,888 - INFO - [app.py:67] - Attempting to load model from: D:\waste_classifier app\waste_classifier_model.h5
+2025-04-21 01:43:43,890 - INFO - [app.py:68] - Current working directory: D:\waste_classifier app
+2025-04-21 01:43:43,890 - INFO - [app.py:69] - Model file exists: True
+2025-04-21 01:43:43,894 - DEBUG - [attrs.py:78] - Creating converter from 3 to 5
+2025-04-21 01:43:44,596 - INFO - [app.py:75] - Model architecture loaded
+2025-04-21 01:43:44,609 - INFO - [app.py:83] - Model compiled with custom optimizer
+2025-04-21 01:43:44,609 - INFO - [app.py:93] - Model loaded successfully
+2025-04-21 01:43:44,615 - INFO - [app.py:162] - Starting waste classification API server...
+2025-04-21 01:43:44,640 - WARNING - [_internal.py:225] -  * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+2025-04-21 01:43:44,640 - INFO - [_internal.py:225] -  * Running on http://192.168.67.229:5000/ (Press CTRL+C to quit)
+2025-04-21 01:44:05,704 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:05] "GET / HTTP/1.1" 200 -
+2025-04-21 01:44:06,045 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-21 01:44:14,738 - DEBUG - [app.py:132] - File saved to: static\upload_5f2b33cf6e46bcd3_download.jpeg
+2025-04-21 01:44:15,101 - DEBUG - [app.py:138] - Image loaded and preprocessed successfully
+2025-04-21 01:44:15,845 - INFO - [app.py:145] - Prediction made: Predicted class: green-glass (Confidence: 100.00%)
+2025-04-21 01:44:15,847 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:15] "POST / HTTP/1.1" 200 -
+2025-04-21 01:44:16,046 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:16] "GET /static/upload_5f2b33cf6e46bcd3_download.jpeg HTTP/1.1" 200 -
+2025-04-21 01:44:40,961 - DEBUG - [app.py:132] - File saved to: static\upload_771d5b2431110db8_bottle.jpeg
+2025-04-21 01:44:40,969 - DEBUG - [app.py:138] - Image loaded and preprocessed successfully
+2025-04-21 01:44:41,116 - INFO - [app.py:145] - Prediction made: Predicted class: plastic (Confidence: 100.00%)
+2025-04-21 01:44:41,117 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:41] "POST / HTTP/1.1" 200 -
+2025-04-21 01:44:41,131 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:41] "GET /static/upload_771d5b2431110db8_bottle.jpeg HTTP/1.1" 200 -
+2025-04-21 01:44:53,246 - DEBUG - [app.py:132] - File saved to: static\upload_1d37ed252cca08b0_D.jpeg
+2025-04-21 01:44:53,271 - DEBUG - [app.py:138] - Image loaded and preprocessed successfully
+2025-04-21 01:44:53,441 - INFO - [app.py:145] - Prediction made: Predicted class: green-glass (Confidence: 100.00%)
+2025-04-21 01:44:53,442 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:53] "POST / HTTP/1.1" 200 -
+2025-04-21 01:44:53,464 - INFO - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:53] "GET /static/upload_1d37ed252cca08b0_D.jpeg HTTP/1.1" 200 -
+2025-04-21 01:44:58,481 - ERROR - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:58] code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x00\x05\x00\x05\x01\x00\x00\x00\x00\x00#\x00\x00ÿ\x01\x00\x01\x00\x00')
+2025-04-21 01:44:58,501 - ERROR - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:58] code 400, message Bad request version ("0\\\x16»'")
+2025-04-21 01:44:58,697 - ERROR - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:58] code 400, message Bad request version ('\x9a\x9a\x13\x01\x13\x02\x13\x03À+À/À,À0Ì©Ì¨À\x13À\x14\x00\x9c\x00\x9d\x00/\x005\x01\x00\x06\x93')
+2025-04-21 01:44:58,706 - ERROR - [_internal.py:225] - 192.168.67.229 - - [21/Apr/2025 01:44:58] code 400, message Bad request version ('\x00\x12\x00\x10\x04\x03\x08\x04\x04\x01\x05\x03\x08\x05\x05\x01\x08\x06\x06\x01\x003\x04ï\x04í')
